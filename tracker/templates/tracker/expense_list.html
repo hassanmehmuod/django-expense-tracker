@@ -1,0 +1,34 @@
+{% extends "tracker/base.html" %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>My expenses</h1>
+    <a href="{% url 'add_expense' %}" class="btn btn-success">Add expense</a>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Amount</th>
+            <th>Date</th>
+            <th>Category</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in expenses %}
+        <tr>
+            <td>{{ i.title }}</td>
+            <td>{{ i.amount }}</td>
+            <td>{{ i.date }}</td>
+            <td>{{ i.category }}</td>
+            <td>
+                <a href="{% url 'edit_expense' i.pk %}" class="btn btn-sm btn-primary">Edit</a>
+                <a href="{% url 'delete_expense' i.pk %}" class="btn btn-sm btn-danger">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
